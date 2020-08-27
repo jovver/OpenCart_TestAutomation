@@ -1,0 +1,36 @@
+{
+  "name": "opencart_testautomation",
+  "version": "1.0.0",
+  "description": "opencart test automation portfolio project",
+  "main": "login.page.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./test/specs/**.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jovver/OpenCart_TestAutomation.git"
+  },
+  "author": "Jon Andre V. Vergara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jovver/OpenCart_TestAutomation/issues"
+  },
+  "homepage": "https://github.com/jovver/OpenCart_TestAutomation#readme",
+  "devDependencies": {
+    "@wdio/cli": "^6.4.2",
+    "@wdio/dot-reporter": "^6.4.0",
+    "@wdio/local-runner": "^6.4.2",
+    "@wdio/mocha-framework": "^6.4.0",
+    "@wdio/spec-reporter": "^6.4.0",
+    "@wdio/sync": "^6.4.0",
+    "chai": "^4.2.0",
+    "chai-webdriverio": "^1.0.0",
+    "chromedriver": "^84.0.1",
+    "local-runner": "^0.1.1-alpha",
+    "wdio-chromedriver-service": "^6.0.3",
+    "webdriverio": "^6.4.2"
+  }
+}
