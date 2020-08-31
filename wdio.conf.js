@@ -186,7 +186,7 @@ exports.config = {
 
         global.expect = chai.expect
         global.should = chai.should()
-        gloabl.assert = chai.assert
+        global.assert = chai.assert
     },
     /**
      * Runs before a WebdriverIO command gets executed.
