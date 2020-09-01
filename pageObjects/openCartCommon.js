@@ -19,7 +19,7 @@ class openCartCommon{
     };
 
     get cartButtonTotal(){
-        return $('#cart-total').getText();
+        return $('#cart-total');
     };
 
     /**
@@ -219,8 +219,10 @@ class openCartCommon{
      */
 
     getProductPriceText(index){
+        var price;
         this.productPrice(index).waitForDisplayed();
-        return this.productPrice(index).getText();
+        price = this.productPrice(index).getText().trim().split(' ');
+        return price[0];
     };
 
     /**
@@ -251,6 +253,20 @@ class openCartCommon{
     clickAddToCompare(index){
         this.productCompare(index).waitForDisplayed();
         this.productCompare(index).click();
+    };
+
+    /**
+     * Returns the current total in the cart
+     * @param {String} currencyString text input of the string that the page is on
+     */
+
+    getCartButtonTotalText(currencyString){
+        var cartButtonText = this.cartButtonTotal.getText();
+        return parseFloat(cartButtonText.trim().substring(cartButtonText.indexOf(currencyString)+1));
+    };
+
+    closeAlertSuccess(){
+        this.alertSuccess.$('button').click();
     };
 
 

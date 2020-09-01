@@ -19,7 +19,6 @@ describe('OpenCart Landing Page Tests', function(){
         it('Check that a product panes shows prices in USD', ()=>{
             for(var numberOfProducts = commonOpenCart.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
                 expect(commonOpenCart.getProductPriceText(numberOfProducts)).contains(currencyData.currencyUSsign);
-                console.log(commonOpenCart.getProductPriceText(numberOfProducts));
             };
         });
     
@@ -36,7 +35,6 @@ describe('OpenCart Landing Page Tests', function(){
         it('Check that a product panes shows prices in EU', ()=>{
             for(var numberOfProducts = commonOpenCart.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
                 expect(commonOpenCart.getProductPriceText(numberOfProducts)).contains(currencyData.currencyEUsign);
-                console.log(commonOpenCart.getProductPriceText(numberOfProducts));
             };
         });
     
@@ -53,7 +51,6 @@ describe('OpenCart Landing Page Tests', function(){
         it('Check that a product panes shows prices in GBP', ()=>{
             for(var numberOfProducts = commonOpenCart.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
                 expect(commonOpenCart.getProductPriceText(numberOfProducts)).contains(currencyData.currencyPoundsign);
-                console.log(commonOpenCart.getProductPriceText(numberOfProducts));
             };
         });
 
@@ -64,8 +61,20 @@ describe('OpenCart Landing Page Tests', function(){
     });
 
     describe('Simple add to cart tests', function(){
-        it.skip('Add two items and check the total', ()=>{
-            commonOpenCart.clickAddToCart(1)
+        it.only('Add two items and check the total', ()=>{
+            var priceOne;
+            var priceTwo;
+            var priceTotal;
+            commonOpenCart.clickAddToCart(1);
+            commonOpenCart.alertSuccess.waitForExist();
+            commonOpenCart.closeAlertSuccess();
+            commonOpenCart.clickAddToCart(2);
+            commonOpenCart.alertSuccess.waitForExist();
+            priceOne = parseFloat(commonOpenCart.getProductPriceText(1).substring(1));
+            priceTwo = parseFloat(commonOpenCart.getProductPriceText(2).substring(1));
+            priceTotal = priceOne + priceTwo;
+            assert(commonOpenCart.getCartButtonTotalText(currencyData.currencyUSsign) == priceTotal, "Totals are not equal");
+
             
         });
     });
