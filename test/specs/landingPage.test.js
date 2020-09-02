@@ -61,21 +61,15 @@ describe('OpenCart Landing Page Tests', function(){
     });
 
     describe('Simple add to cart tests', function(){
-        it.only('Add two items and check the total', ()=>{
-            var priceOne;
-            var priceTwo;
-            var priceTotal;
-            commonOpenCart.clickAddToCart(1);
-            commonOpenCart.alertSuccess.waitForExist();
-            commonOpenCart.closeAlertSuccess();
-            commonOpenCart.clickAddToCart(2);
-            commonOpenCart.alertSuccess.waitForExist();
-            priceOne = parseFloat(commonOpenCart.getProductPriceText(1).substring(1));
-            priceTwo = parseFloat(commonOpenCart.getProductPriceText(2).substring(1));
-            priceTotal = priceOne + priceTwo;
+        it('Add two items and check the total', ()=>{
+            var priceTotal = 0;
+            for(var index = 1; index <=2; index+=1){
+                commonOpenCart.clickAddToCart(index);
+                commonOpenCart.alertSuccess.waitForExist();
+                commonOpenCart.closeAlertSuccess();
+                priceTotal+=commonOpenCart.getProductPriceText(index);
+            };
             assert(commonOpenCart.getCartButtonTotalText(currencyData.currencyUSsign) == priceTotal, "Totals are not equal");
-
-            
         });
     });
 

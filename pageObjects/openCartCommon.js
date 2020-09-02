@@ -35,7 +35,8 @@ class openCartCommon{
     };
 
     get openMenuItemArray(){
-        return $$('.open .dropdown-menu li');
+        return this.openMenu.$$('li');
+        //$$('.open .dropdown-menu li');
     };
 
     /**
@@ -44,12 +45,14 @@ class openCartCommon{
      */
 
     openMenuItem(index){
-        return $('.open .dropdown-menu li:nth-child (' + index + ')');
+        return this.openMenu.$('li:nth-child (' + index + ')');
+        //$('.open .dropdown-menu li:nth-child (' + index + ')');
 
     };
 
     get seeAllOption(){
-        return $('.open .dropdown-menu a.see-all');
+        return this.openMenu.$('a.see-all');
+        //$('.open .dropdown-menu a.see-all');
     };
 
     get alertSuccess(){
@@ -71,7 +74,8 @@ class openCartCommon{
      */
 
     myAccountsOption(index){
-        return $('#top-links li.dropdown li:nth-child(' + index + ')');
+        return this.myAccounts.$('li:nth-child(' + index + ')');
+        //$('#top-links li.dropdown li:nth-child(' + index + ')');
     };
 
     get wishlist(){
@@ -99,7 +103,7 @@ class openCartCommon{
      */
 
     selectCurrency(text){
-        return $('#form-currency button[name=' + text + ']');
+        return this.currencyToggle.$('button[name=' + text + ']');
     };
 
     productPrice(index){
@@ -222,7 +226,7 @@ class openCartCommon{
         var price;
         this.productPrice(index).waitForDisplayed();
         price = this.productPrice(index).getText().trim().split(' ');
-        return price[0];
+        return parseFloat(price[0].substring(1));
     };
 
     /**
