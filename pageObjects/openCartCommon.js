@@ -1,6 +1,6 @@
 class openCartCommon{
 
-    //The following lists all relevant and common elements
+    //The following lists all relevant common elements
 
     get searchBox(){
         return $('#search input');
@@ -11,7 +11,7 @@ class openCartCommon{
     };
 
     get homeIcon(){
-        return $('#logo');
+        return $('#logo a');
     };
 
     get cartButton(){
@@ -114,6 +114,10 @@ class openCartCommon{
         return $$('.product-layout .price');
     };
 
+    get productsArray(){
+        return $$('.product-layout');
+    };
+
     productShoppingCart(index){
         return $('.product-layout:nth-child(' + index + ') button:nth-child(1)');
     };
@@ -134,6 +138,10 @@ class openCartCommon{
         return $('.product-layout:nth-child(' + index +') .price-tax');
     };
 
+    get h1Element(){
+        return $('#content h1');
+    };
+
 
     //======================================================
     // Interaction methods
@@ -149,7 +157,7 @@ class openCartCommon{
         this.searchButton.click();
     };
 
-    goBackToHome(){
+    clickHome(){
         this.homeIcon.waitForDisplayed();
         this.homeIcon.click();
     };
@@ -226,7 +234,7 @@ class openCartCommon{
         var price;
         this.productPrice(index).waitForDisplayed();
         price = this.productPrice(index).getText().trim().split(' ');
-        return parseFloat(price[0].substring(1));
+        return price[0];
     };
 
     /**

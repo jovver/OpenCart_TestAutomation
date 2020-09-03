@@ -1,79 +1,72 @@
-const commonOpenCart = require('../../pageObjects/openCartCommon');
+const openCartCommon = require('../../pageObjects/openCartCommon');
 const currencyData = require('../../data/currencyData');
+const textAssertions = require('../../data/textAssertions');
+const { expect } = require('chai');
 
 
-describe('OpenCart Landing Page Tests', function(){
+describe('OpenCart Landing Page Top Header Tests', function(){
 
     browser.url('/');
 
     describe('Change currency tests', function(){
         it('Check that the page defaults to a USD currency', ()=>{
-            expect(commonOpenCart.currencyToggle.getText()).contains(currencyData.currencyUSsign);
+            expect(openCartCommon.currencyToggle.getText()).contains(currencyData.currencyUSsign);
     
         });
     
         it('Check that the shopping cart icon is in USD', ()=>{
-            expect(commonOpenCart.cartButton.getText()).contains(currencyData.currencyUSsign);
+            expect(openCartCommon.cartButton.getText()).contains(currencyData.currencyUSsign);
         });
     
         it('Check that a product panes shows prices in USD', ()=>{
-            for(var numberOfProducts = commonOpenCart.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
-                expect(commonOpenCart.getProductPriceText(numberOfProducts)).contains(currencyData.currencyUSsign);
+            for(var numberOfProducts = openCartCommon.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
+                expect(openCartCommon.getProductPriceText(numberOfProducts)).contains(currencyData.currencyUSsign);
             };
         });
     
     
         it('Toggle the currency to EU', ()=>{
-            commonOpenCart.clickSelectedCurrency(currencyData.currencyEU);
-            expect(commonOpenCart.currencyToggle.getText()).contains(currencyData.currencyEUsign);
+            openCartCommon.clickSelectedCurrency(currencyData.currencyEU);
+            expect(openCartCommon.currencyToggle.getText()).contains(currencyData.currencyEUsign);
         });
     
         it('Check that the shopping car icon is in EU', ()=>{
-            expect(commonOpenCart.cartButton.getText()).contains(currencyData.currencyEUsign);
+            expect(openCartCommon.cartButton.getText()).contains(currencyData.currencyEUsign);
         });
     
         it('Check that a product panes shows prices in EU', ()=>{
-            for(var numberOfProducts = commonOpenCart.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
-                expect(commonOpenCart.getProductPriceText(numberOfProducts)).contains(currencyData.currencyEUsign);
+            for(var numberOfProducts = openCartCommon.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
+                expect(openCartCommon.getProductPriceText(numberOfProducts)).contains(currencyData.currencyEUsign);
             };
         });
     
     
         it('Toggle the currency to GBP', ()=>{
-            commonOpenCart.clickSelectedCurrency(currencyData.currencyPound);
-            expect(commonOpenCart.currencyToggle.getText()).contains(currencyData.currencyPoundsign);
+            openCartCommon.clickSelectedCurrency(currencyData.currencyPound);
+            expect(openCartCommon.currencyToggle.getText()).contains(currencyData.currencyPoundsign);
         });
     
         it('Check that the shopping car icon is in GBP', ()=>{
-            expect(commonOpenCart.cartButton.getText()).contains(currencyData.currencyPoundsign);
+            expect(openCartCommon.cartButton.getText()).contains(currencyData.currencyPoundsign);
         });
     
         it('Check that a product panes shows prices in GBP', ()=>{
-            for(var numberOfProducts = commonOpenCart.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
-                expect(commonOpenCart.getProductPriceText(numberOfProducts)).contains(currencyData.currencyPoundsign);
+            for(var numberOfProducts = openCartCommon.productPriceArray.length; numberOfProducts > 0; numberOfProducts -= 1){
+                expect(openCartCommon.getProductPriceText(numberOfProducts)).contains(currencyData.currencyPoundsign);
             };
         });
 
         it('Toggle back the currency to USD', ()=>{
-            commonOpenCart.clickSelectedCurrency(currencyData.currencyUS);
-            expect(commonOpenCart.currencyToggle.getText()).contains(currencyData.currencyUSsign);
+            openCartCommon.clickSelectedCurrency(currencyData.currencyUS);
+            expect(openCartCommon.currencyToggle.getText()).contains(currencyData.currencyUSsign);
         });
     });
 
-    describe('Simple add to cart tests', function(){
-        it('Add two items and check the total', ()=>{
-            var priceTotal = 0;
-            for(var index = 1; index <=2; index+=1){
-                commonOpenCart.clickAddToCart(index);
-                commonOpenCart.alertSuccess.waitForExist();
-                commonOpenCart.closeAlertSuccess();
-                priceTotal+=commonOpenCart.getProductPriceText(index);
-            };
-            assert(commonOpenCart.getCartButtonTotalText(currencyData.currencyUSsign) == priceTotal, "Totals are not equal");
+    describe('Simple search test', function(){
+        it('Able to enter a search parameter and the page updates', ()=>{
+            openCartCommon.searchBox.setValue(textAssertions.searchParameter);
+            openCartCommon.searchButton.click();
+            expect(openCartCommon.h1Element.getText()).equal("Search - " + textAssertions.searchParameter);
         });
     });
-
-    
-
-
 });
