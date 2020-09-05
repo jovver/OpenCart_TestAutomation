@@ -3,6 +3,7 @@ const productCompare = require('../../pageObjects/openCartProductCompare');
 const currencyData = require('../../data/currencyData');
 const textAssertions = require('../../data/textAssertions');
 const url = require('../../data/urls');
+const { assert } = require('chai');
 
 describe('Landing Page Add To tests', function(){
 
@@ -25,7 +26,7 @@ describe('Landing Page Add To tests', function(){
 
     describe('Add to Compare tests', function(){
 
-        it('Randomly add items for comparison', ()=>{
+        it('Randomly add items for comparison and product comparison page opens', ()=>{
             // Randomly chooses an integer from 1 to 4
             check = Math.floor(Math.random()*3) + 1;
             for(var index = 1; index <= check; index+=1){
@@ -35,6 +36,11 @@ describe('Landing Page Add To tests', function(){
                    browser.pause(500);
                 };
             browser.url(url.productCompare);
+            openCartCommon.homeIcon.waitForDisplayed();
+            assert.equal(textAssertions.comparePageTitle, browser.getTitle(), "Page title incorrect");
+        });
+
+        it('Check that a product comparison table is present', ()=>{
             productCompare.tableMainHeader.waitForDisplayed();
             expect(textAssertions.productDetails).equal(productCompare.tableMainHeader.getText());
         });

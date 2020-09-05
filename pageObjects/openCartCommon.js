@@ -11,7 +11,7 @@ class openCartCommon{
     };
 
     get homeIcon(){
-        return $('#logo a');
+        return $('#logo');
     };
 
     get cartButton(){

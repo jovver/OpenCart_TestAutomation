@@ -1,13 +1,21 @@
 const openCartCommon = require('../../pageObjects/openCartCommon');
 const currencyData = require('../../data/currencyData');
 const textAssertions = require('../../data/textAssertions');
-const { expect } = require('chai');
+const { expect, assert } = require('chai');
 
 
 describe('OpenCart Landing Page Top Header Tests', function(){
 
     browser.url('/');
 
+    describe('Landing page opens', function(){
+        it('Checks the landing page title', ()=>{
+            openCartCommon.homeIcon.waitForDisplayed();
+            assert.equal(textAssertions.homePageTitle, browser.getTitle(), "Page title incorrect");
+        });
+        
+    });
+    
     describe('Change currency tests', function(){
         it('Check that the page defaults to a USD currency', ()=>{
             expect(openCartCommon.currencyToggle.getText()).contains(currencyData.currencyUSsign);
