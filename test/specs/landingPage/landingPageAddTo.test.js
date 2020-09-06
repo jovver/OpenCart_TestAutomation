@@ -1,8 +1,6 @@
-const openCartCommon = require('../../pageObjects/openCartCommon');
-const productCompare = require('../../pageObjects/openCartProductCompare');
-const currencyData = require('../../data/currencyData');
-const textAssertions = require('../../data/textAssertions');
-const url = require('../../data/urls');
+const openCartCommon = require('../../../pageObjects/openCartCommon');
+const productCompare = require('../../../pageObjects/openCartProductCompare');
+const url = require('../../../urls');
 const { assert } = require('chai');
 
 describe('Landing Page Add To tests', function(){
@@ -20,7 +18,7 @@ describe('Landing Page Add To tests', function(){
                 priceTotal+=parseFloat(openCartCommon.getProductPriceText(index).substring(1));
                 browser.pause(500);
             };
-            assert(openCartCommon.getCartButtonTotalText(currencyData.currencyUSsign) == priceTotal, "Totals are not equal");
+            assert(openCartCommon.getCartButtonTotalText("$") == priceTotal, "Prices are not equal");
         });
     });
 
@@ -37,12 +35,12 @@ describe('Landing Page Add To tests', function(){
                 };
             browser.url(url.productCompare);
             openCartCommon.homeIcon.waitForDisplayed();
-            assert.equal(textAssertions.comparePageTitle, browser.getTitle(), "Page title incorrect");
+            assert.equal("Product Comparison", browser.getTitle(), "Page title incorrect");
         });
 
         it('Check that a product comparison table is present', ()=>{
             productCompare.tableMainHeader.waitForDisplayed();
-            expect(textAssertions.productDetails).equal(productCompare.tableMainHeader.getText());
+            expect("Product Details").equal(productCompare.tableMainHeader.getText());
         });
 
         it('Remove all products and check that the page updates', ()=>{
@@ -53,9 +51,7 @@ describe('Landing Page Add To tests', function(){
                 browser.pause(500);
             };
             productCompare.blankPageParagraph.waitForDisplayed();
-            expect(textAssertions.noProducts).equal(productCompare.blankPageParagraph.getText());
-            productCompare.clickContinueButton();
-            openCartCommon.homeIcon.waitForDisplayed();
+            expect("You have not chosen any products to compare.").equal(productCompare.blankPageParagraph.getText());
         });
     });
 });

@@ -19,6 +19,16 @@ exports.config = {
     specs: [
         './test/specs/**/*.js'
     ],
+
+    suites: {
+        landingPage:[
+            './test/specs/landingPage/*.js'
+        ],
+        contactUs:[
+            './test/specs/contactUs/*.js'
+        ]
+
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'

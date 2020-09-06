@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/wdio ./wdio.conf.js"
+    "test": "./node_modules/.bin/wdio ./wdio.conf.js",
+    "landingPage": "./node_modules/.bin/wdio ./wdio.conf.js --suite landingPage",
+    "contactUs": "./node_modules/.bin/wdio ./wdio.conf.js --suite contactUs"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,4 @@
+//TODO: Makes this a constructor and default class for inheritance
 class openCartCommon{
 
     //The following lists all relevant common elements

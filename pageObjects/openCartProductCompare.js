@@ -33,7 +33,7 @@ class openCartProductCompare{
         index+=1
         return $('//td[' + index + ']//a[contains(@class, "btn-danger")]');
     };
-
+    //TODO: Move this element to the Common Class/Page Object
     get blankPageParagraph(){
         return $('#content p');
     };
@@ -63,4 +63,4 @@ class openCartProductCompare{
 
 };
 
-module.exports = new openCartProductCompare()
+module.exports = new openCartProductCompare();
